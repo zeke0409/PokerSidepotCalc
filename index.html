@@ -1,8 +1,225 @@
-<html>
-    <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>テキサスホールデムポーカーポッド計算</title>
+<style>
+    table {
+        width: 50%;
+        border-collapse: collapse;
+        margin: 20px auto;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
 
-    </head>
-    <body>
-        <h1>Hello World</h1>
-    </body>
+<h2>ポッド計算 by zeke</h2>
+
+<form id="playerForm">
+    <label for="UTG">UTG:</label>
+    <input type="text" id="UTG" name="UTG" placeholder="プレイヤー名を入力" value="zeke1" required>
+    <input type="number" id="betUTG" name="betUTG" placeholder="ベット額" min="0" value="1000">
+    <input type="number" id="rankUTG" name="rankUTG" placeholder="順位" min="1" value="1">
+    <input type="checkbox" id="checkboxUTG" name="checkboxUTG" checked><br><br>
+    
+    <label for="UTG1">UTG+1:</label>
+    <input type="text" id="UTG1" name="UTG1" placeholder="プレイヤー名を入力" value="zeke7" required>
+    <input type="number" id="betUTG1" name="betUTG1" placeholder="ベット額" min="0" value="5000">
+    <input type="number" id="rankUTG1" name="rankUTG1" placeholder="順位" min="1" value="2">
+    <input type="checkbox" id="checkboxUTG1" name="checkboxUTG1" checked><br><br>
+
+    <label for="LJ">LJ:</label>
+    <input type="text" id="LJ" name="LJ" placeholder="プレイヤー名を入力" value="zeke8" required>
+    <input type="number" id="betLJ" name="betLJ" placeholder="ベット額" min="0" value="5000">
+    <input type="number" id="rankLJ" name="rankLJ" placeholder="順位" min="1" value="3">
+    <input type="checkbox" id="checkboxLJ" name="checkboxLJ" checked><br><br>
+
+    <label for="HJ">HJ:</label>
+    <input type="text" id="HJ" name="HJ" placeholder="プレイヤー名を入力" value="zeke2" required>
+    <input type="number" id="betHJ" name="betHJ" placeholder="ベット額" min="0" value="100" >
+    <input type="number" id="rankHJ" name="rankHJ" placeholder="順位" min="1" value="4">
+    <input type="checkbox" id="checkboxHJ" name="checkboxHJ" checked><br><br>
+    
+    <label for="CO">CO:</label>
+    <input type="text" id="CO" name="CO" placeholder="プレイヤー名を入力" value="zeke3" required>
+    <input type="number" id="betCO" name="betCO" placeholder="ベット額" min="0" value="10">
+    <input type="number" id="rankCO" name="rankCO" placeholder="順位" min="1" value="5">
+    <input type="checkbox" id="checkboxCO" name="checkboxCO" checked><br><br>
+    
+    <label for="BTN">BTN:</label>
+    <input type="text" id="BTN" name="BTN" placeholder="プレイヤー名を入力" value="zeke4" required>
+    <input type="number" id="betBTN" name="betBTN" placeholder="ベット額" min="0" value="3000">
+    <input type="number" id="rankBTN" name="rankBTN" placeholder="順位" min="1" value="6">
+    <input type="checkbox" id="checkboxBTN" name="checkboxBTN" checked><br><br>
+    
+    <label for="SB">SB:</label>
+    <input type="text" id="SB" name="SB" placeholder="プレイヤー名を入力" value="zeke5" required>
+    <input type="number" id="betSB" name="betSB" placeholder="ベット額" min="0" value="7000">
+    <input type="number" id="rankSB" name="rankSB" placeholder="順位" min="1" value="7">
+    <input type="checkbox" id="checkboxSB" name="checkboxSB" checked><br><br>
+    
+    <label for="BB">BB:</label>
+    <input type="text" id="BB" name="BB" placeholder="プレイヤー名を入力" value="zeke6" required>
+    <input type="number" id="betBB" name="betBB" placeholder="ベット額" min="0" value="8000">
+    <input type="number" id="rankBB" name="rankBB" placeholder="順位" min="1" value="8">
+    <input type="checkbox" id="checkboxBB" name="checkboxBB" checked><br><br>
+    
+    
+    <button type="submit">ポッド計算</button>
+</form>
+
+<table id="scoreTable">
+    <thead>
+        <tr>
+            <th>プレイヤー名</th>
+            <th>ポジション</th>
+            <th>ベット額</th>
+            <th>順位</th>
+            <th>獲得チップ数</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Scores will be inserted -->
+    </tbody>
+</table>
+<table id="podTable">
+    <thead>
+        <tr>
+            <th>ポッド</th>
+            <th>ポッド額</th>
+            <th>権利者</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Pods will be inserted -->
+    </tbody>
+</table>
+
+<script>
+    document.getElementById("playerForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        var players = [];
+        var positions = ["UTG", "UTG1", "LJ", "HJ", "CO", "BTN", "SB", "BB"];
+        var bets = [];
+        var ranks = [];
+        var checkboxes = [];
+        var chips= [];
+        
+        positions.forEach(function(position) {
+            var checkbox = document.getElementById("checkbox" + position);
+            if (checkbox.checked) {
+                players.push(document.getElementById(position).value);
+                bets.push(document.getElementById("bet" + position).value);
+                ranks.push(document.getElementById("rank" + position).value);
+                chips.push(0);
+                checkboxes.push(true);
+            }
+        });
+
+        var tableBody = document.querySelector("#podTable tbody");
+        tableBody.innerHTML = ""; // Clear previous entries
+        var indexedBets = bets.map((value, index) => [value, index]);
+        indexedBets.sort((x, y) => x[0] - y[0]);
+        podNames=["Main","2nd","3rd","4th","5th","6th","7th","8th"]
+        nowAccPod=0
+        PodsInfo=[];
+        for (var i = 0; i < indexedBets.length; i++) {
+            var row = document.createElement("tr");
+            var podNameCell = document.createElement("td");
+            var podCell = document.createElement("td");
+            var podMember = document.createElement("td");
+
+            podNameCell.textContent=podNames[i];
+            pod=(indexedBets[i][0]-nowAccPod)*(indexedBets.length-i);
+            podCell.textContent=pod;
+            nowAccPod=indexedBets[i][0];
+            podMemberNames="";
+            playerIdx=[]
+            for (var j=i; j<indexedBets.length; j++){
+                podMemberNames=podMemberNames+players[indexedBets[j][1]]+", ";
+                playerIdx.push(indexedBets[j][1])
+            }
+            podMember.textContent=podMemberNames;
+            PodsInfo.push([playerIdx,pod])
+            row.appendChild(podNameCell);
+            row.appendChild(podCell);
+            row.appendChild(podMember);
+
+            tableBody.appendChild(row);
+        }
+
+        
+        
+        for(var i=0; i<PodsInfo.length; i++){
+            members=PodsInfo[i][0];
+            pod=PodsInfo[i][1];
+            membersInfo=[];
+            now_rank=100
+            for(var j=0; j<members.length; j++){
+                if(now_rank>ranks[members[j]]){
+                    membersInfo=[members[j]];
+                }else if (now_rank==ranks[members[j]]){
+                    membersInfo.push(members[j]);
+                }else{
+                    continue;
+                }
+                now_rank=ranks[members[j]];
+                console.log(i+" "+now_rank+" "+ranks[members[j]]+" "+players[membersInfo[0]]);
+            }
+            for(var j=0; j<membersInfo.length;j++){
+                chips[membersInfo[j]]=chips[membersInfo[j]]+pod/membersInfo.length;
+            }
+        }
+        var tableBody = document.querySelector("#scoreTable tbody");
+        tableBody.innerHTML = ""; // Clear previous entries
+        for (var i = 0; i < players.length; i++) {
+            var row = document.createElement("tr");
+            var nameCell = document.createElement("td");
+            var positionCell = document.createElement("td");
+            var betCell = document.createElement("td");
+            var rankCell = document.createElement("td");
+            var chipsCell = document.createElement("td");
+                
+            nameCell.textContent = players[i];
+            positionCell.textContent = positions[i];
+            betCell.textContent = bets[i];
+            rankCell.textContent = ranks[i];
+            chipsCell.textContent = chips[i];
+                
+            row.appendChild(nameCell);
+            row.appendChild(positionCell);
+            row.appendChild(betCell);
+            row.appendChild(rankCell);
+            row.appendChild(chipsCell);
+                
+            tableBody.appendChild(row);
+        }
+        
+        
+        
+    });
+    
+    function calculateChips(numPlayers, rank) {
+        if (!rank || rank < 1 || rank > numPlayers) {
+            return ""; // Return empty string if rank is not provided or invalid
+        }
+        
+        // Calculate chips based on rank (example formula, you can adjust it as needed)
+        var totalChips = 50000; // Total chips in the game
+        var prizePoolRatio = [0.5, 0.3, 0.2]; // Example prize pool distribution
+        var prizePool = totalChips * prizePoolRatio[numPlayers - 3];
+        var chips = prizePool * (1 - rank / numPlayers);
+        
+        return chips.toFixed(0); // Return chips rounded to nearest integer
+    }
+</script>
+
+</body>
 </html>
