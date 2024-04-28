@@ -171,7 +171,6 @@
                     continue;
                 }
                 now_rank=ranks[members[j]];
-                console.log(i+" "+now_rank+" "+ranks[members[j]]+" "+players[membersInfo[0]]);
             }
             for(var j=0; j<membersInfo.length;j++){
                 chips[membersInfo[j]]=chips[membersInfo[j]]+pod/membersInfo.length;
@@ -205,20 +204,6 @@
         
         
     });
-    
-    function calculateChips(numPlayers, rank) {
-        if (!rank || rank < 1 || rank > numPlayers) {
-            return ""; // Return empty string if rank is not provided or invalid
-        }
-        
-        // Calculate chips based on rank (example formula, you can adjust it as needed)
-        var totalChips = 50000; // Total chips in the game
-        var prizePoolRatio = [0.5, 0.3, 0.2]; // Example prize pool distribution
-        var prizePool = totalChips * prizePoolRatio[numPlayers - 3];
-        var chips = prizePool * (1 - rank / numPlayers);
-        
-        return chips.toFixed(0); // Return chips rounded to nearest integer
-    }
 </script>
 
 </body>
