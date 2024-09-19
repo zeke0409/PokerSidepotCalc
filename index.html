@@ -15,70 +15,45 @@
         padding: 8px;
         text-align: center;
     }
+    #clipboardButton {
+        font-size: 20px;   
+        padding: 15px 30px; 
+        background-color: #000000;
+        color: white;   
+        border: none;     
+        border-radius: 10px; 
+        cursor: pointer;   
+        margin-top: 20px;  
+    }
+
+    #clipboardButton:hover {
+        background-color: #000000; 
+    }
+
+    #submitButton {
+        font-size: 20px;   
+        padding: 15px 30px; 
+        background-color: #000000;
+        color: white;   
+        border: none;     
+        border-radius: 10px; 
+        cursor: pointer;   
+        margin-top: 20px;  
+    }
+
+    #submitButton:hover {
+        background-color: #000000; 
+    }
+    
 </style>
 </head>
 <body>
 
 <h2>ポッド計算 by zeke</h2>
-
-<form id="playerForm">
-    <label for="UTG">UTG:</label>
-    <input type="text" id="UTG" name="UTG" placeholder="プレイヤー名を入力" value="zeke1" required>
-    <input type="number" id="betUTG" name="betUTG" placeholder="ベット額" min="0" value="1000">
-    <input type="number" id="rankUTG" name="rankUTG" placeholder="順位" min="1" value="1">
-    <input type="checkbox" id="checkboxUTG" name="checkboxUTG" checked><br><br>
-    
-    <label for="UTG1">UTG+1:</label>
-    <input type="text" id="UTG1" name="UTG1" placeholder="プレイヤー名を入力" value="zeke7" required>
-    <input type="number" id="betUTG1" name="betUTG1" placeholder="ベット額" min="0" value="5000">
-    <input type="number" id="rankUTG1" name="rankUTG1" placeholder="順位" min="1" value="2">
-    <input type="checkbox" id="checkboxUTG1" name="checkboxUTG1" checked><br><br>
-
-    <label for="LJ">LJ:</label>
-    <input type="text" id="LJ" name="LJ" placeholder="プレイヤー名を入力" value="zeke8" required>
-    <input type="number" id="betLJ" name="betLJ" placeholder="ベット額" min="0" value="5000">
-    <input type="number" id="rankLJ" name="rankLJ" placeholder="順位" min="1" value="3">
-    <input type="checkbox" id="checkboxLJ" name="checkboxLJ" checked><br><br>
-
-    <label for="HJ">HJ:</label>
-    <input type="text" id="HJ" name="HJ" placeholder="プレイヤー名を入力" value="zeke2" required>
-    <input type="number" id="betHJ" name="betHJ" placeholder="ベット額" min="0" value="100" >
-    <input type="number" id="rankHJ" name="rankHJ" placeholder="順位" min="1" value="4">
-    <input type="checkbox" id="checkboxHJ" name="checkboxHJ" checked><br><br>
-    
-    <label for="CO">CO:</label>
-    <input type="text" id="CO" name="CO" placeholder="プレイヤー名を入力" value="zeke3" required>
-    <input type="number" id="betCO" name="betCO" placeholder="ベット額" min="0" value="10">
-    <input type="number" id="rankCO" name="rankCO" placeholder="順位" min="1" value="5">
-    <input type="checkbox" id="checkboxCO" name="checkboxCO" checked><br><br>
-    
-    <label for="BTN">BTN:</label>
-    <input type="text" id="BTN" name="BTN" placeholder="プレイヤー名を入力" value="zeke4" required>
-    <input type="number" id="betBTN" name="betBTN" placeholder="ベット額" min="0" value="3000">
-    <input type="number" id="rankBTN" name="rankBTN" placeholder="順位" min="1" value="6">
-    <input type="checkbox" id="checkboxBTN" name="checkboxBTN" checked><br><br>
-    
-    <label for="SB">SB:</label>
-    <input type="text" id="SB" name="SB" placeholder="プレイヤー名を入力" value="zeke5" required>
-    <input type="number" id="betSB" name="betSB" placeholder="ベット額" min="0" value="7000">
-    <input type="number" id="rankSB" name="rankSB" placeholder="順位" min="1" value="7">
-    <input type="checkbox" id="checkboxSB" name="checkboxSB" checked><br><br>
-    
-    <label for="BB">BB:</label>
-    <input type="text" id="BB" name="BB" placeholder="プレイヤー名を入力" value="zeke6" required>
-    <input type="number" id="betBB" name="betBB" placeholder="ベット額" min="0" value="8000">
-    <input type="number" id="rankBB" name="rankBB" placeholder="順位" min="1" value="8">
-    <input type="checkbox" id="checkboxBB" name="checkboxBB" checked><br><br>
-    
-    
-    <button type="submit">ポッド計算</button>
-</form>
-
 <table id="scoreTable">
     <thead>
         <tr>
             <th>プレイヤー名</th>
-            <th>ポジション</th>
             <th>ベット額</th>
             <th>順位</th>
             <th>獲得チップ数</th>
@@ -100,8 +75,161 @@
         <!-- Pods will be inserted -->
     </tbody>
 </table>
+<button id="clipboardButton">クリップボードのURLに移動</button>
+
+<form id="playerForm">
+    <button type="submit" id="submitButton">ポッド計算</button><br><br>
+
+    <label for="UTG">UTG:</label>
+    <input type="text" id="UTG" name="UTG" placeholder="プレイヤー名を入力" value="A" required>
+    <input type="number" id="betUTG" name="betUTG" placeholder="ベット額" min="0" value="0">
+    <input type="number" id="rankUTG" name="rankUTG" placeholder="順位" min="1" value="9">
+    <input type="checkbox" id="checkboxUTG" name="checkboxUTG" checked><br><br>
+    
+    <label for="UTG1">UTG+1:</label>
+    <input type="text" id="UTG1" name="UTG1" placeholder="プレイヤー名を入力" value="B" required>
+    <input type="number" id="betUTG1" name="betUTG1" placeholder="ベット額" min="0" value="0">
+    <input type="number" id="rankUTG1" name="rankUTG1" placeholder="順位" min="1" value="9">
+    <input type="checkbox" id="checkboxUTG1" name="checkboxUTG1" checked><br><br>
+
+    <label for="LJ">LJ:</label>
+    <input type="text" id="LJ" name="LJ" placeholder="プレイヤー名を入力" value="C" required>
+    <input type="number" id="betLJ" name="betLJ" placeholder="ベット額" min="0" value="0">
+    <input type="number" id="rankLJ" name="rankLJ" placeholder="順位" min="1" value="9">
+    <input type="checkbox" id="checkboxLJ" name="checkboxLJ" checked><br><br>
+
+    <label for="HJ">HJ:</label>
+    <input type="text" id="HJ" name="HJ" placeholder="プレイヤー名を入力" value="D" required>
+    <input type="number" id="betHJ" name="betHJ" placeholder="ベット額" min="0" value="0" >
+    <input type="number" id="rankHJ" name="rankHJ" placeholder="順位" min="1" value="9">
+    <input type="checkbox" id="checkboxHJ" name="checkboxHJ" checked><br><br>
+    
+    <label for="CO">CO:</label>
+    <input type="text" id="CO" name="CO" placeholder="プレイヤー名を入力" value="E" required>
+    <input type="number" id="betCO" name="betCO" placeholder="ベット額" min="0" value="0">
+    <input type="number" id="rankCO" name="rankCO" placeholder="順位" min="1" value="9">
+    <input type="checkbox" id="checkboxCO" name="checkboxCO" checked><br><br>
+    
+    <label for="BTN">BTN:</label>
+    <input type="text" id="BTN" name="BTN" placeholder="プレイヤー名を入力" value="F" required>
+    <input type="number" id="betBTN" name="betBTN" placeholder="ベット額" min="0" value="0">
+    <input type="number" id="rankBTN" name="rankBTN" placeholder="順位" min="1" value="9">
+    <input type="checkbox" id="checkboxBTN" name="checkboxBTN" checked><br><br>
+    
+    <label for="SB">SB:</label>
+    <input type="text" id="SB" name="SB" placeholder="プレイヤー名を入力" value="G" required>
+    <input type="number" id="betSB" name="betSB" placeholder="ベット額" min="0" value="0">
+    <input type="number" id="rankSB" name="rankSB" placeholder="順位" min="1" value="9">
+    <input type="checkbox" id="checkboxSB" name="checkboxSB" checked><br><br>
+    
+    <label for="BB">BB:</label>
+    <input type="text" id="BB" name="BB" placeholder="プレイヤー名を入力" value="H" required>
+    <input type="number" id="betBB" name="betBB" placeholder="ベット額" min="0" value="0">
+    <input type="number" id="rankBB" name="rankBB" placeholder="順位" min="1" value="9">
+    <input type="checkbox" id="checkboxBB" name="checkboxBB" checked><br>
+    
+    
+    
+</form>
+
 
 <script>
+    function populateFormFromURL() {
+        
+        // チェックを外す
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        });
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Aプレイヤー (UTG)
+        if (urlParams.has('Arank')||urlParams.has('Abet')) {
+            if(!(urlParams.has('Arank')&&urlParams.has('Abet'))){
+                alert('Aプレイヤーのクエリが有効ではありません');
+            }else{
+                document.getElementById('rankUTG').value = urlParams.get('Arank');
+                document.getElementById('betUTG').value = urlParams.get('Abet');
+                document.getElementById('checkboxUTG').checked = true;
+            }
+        }
+        // Bプレイヤー (UTG+1)
+        if (urlParams.has('Brank') || urlParams.has('Bbet')) {
+            if (!(urlParams.has('Brank') && urlParams.has('Bbet'))) {
+                alert('Bプレイヤーのクエリが有効ではありません');
+            } else {
+                document.getElementById('rankUTG1').value = urlParams.get('Brank');
+                document.getElementById('betUTG1').value = urlParams.get('Bbet');
+                document.getElementById('checkboxUTG1').checked = true;
+            }
+        }
+
+        // Cプレイヤー (LJ)
+        if (urlParams.has('Crank') || urlParams.has('Cbet')) {
+            if (!(urlParams.has('Crank') && urlParams.has('Cbet'))) {
+                alert('Cプレイヤーのクエリが有効ではありません');
+            } else {
+                document.getElementById('rankLJ').value = urlParams.get('Crank');
+                document.getElementById('betLJ').value = urlParams.get('Cbet');
+                document.getElementById('checkboxLJ').checked = true;
+            }
+        }
+
+        // Dプレイヤー (HJ)
+        if (urlParams.has('Drank') || urlParams.has('Dbet')) {
+            if (!(urlParams.has('Drank') && urlParams.has('Dbet'))) {
+                alert('Dプレイヤーのクエリが有効ではありません');
+            } else {
+                document.getElementById('rankHJ').value = urlParams.get('Drank');
+                document.getElementById('betHJ').value = urlParams.get('Dbet');
+                document.getElementById('checkboxHJ').checked = true;
+            }
+        }
+
+        // Eプレイヤー (CO)
+        if (urlParams.has('Erank') || urlParams.has('Ebet')) {
+            if (!(urlParams.has('Erank') && urlParams.has('Ebet'))) {
+                alert('Eプレイヤーのクエリが有効ではありません');
+            } else {
+                document.getElementById('rankCO').value = urlParams.get('Erank');
+                document.getElementById('betCO').value = urlParams.get('Ebet');
+                document.getElementById('checkboxCO').checked = true;
+            }
+        }
+
+        // Fプレイヤー (BTN)
+        if (urlParams.has('Frank') || urlParams.has('Fbet')) {
+            if (!(urlParams.has('Frank') && urlParams.has('Fbet'))) {
+                alert('Fプレイヤーのクエリが有効ではありません');
+            } else {
+                document.getElementById('rankBTN').value = urlParams.get('Frank');
+                document.getElementById('betBTN').value = urlParams.get('Fbet');
+                document.getElementById('checkboxBTN').checked = true;
+            }
+        }
+
+        // Gプレイヤー (SB)
+        if (urlParams.has('Grank') || urlParams.has('Gbet')) {
+            if (!(urlParams.has('Grank') && urlParams.has('Gbet'))) {
+                alert('Gプレイヤーのクエリが有効ではありません');
+            } else {
+                document.getElementById('rankSB').value = urlParams.get('Grank');
+                document.getElementById('betSB').value = urlParams.get('Gbet');
+                document.getElementById('checkboxSB').checked = true;
+            }
+        }
+
+        // Hプレイヤー (BB)
+        if (urlParams.has('Hrank') || urlParams.has('Hbet')) {
+            if (!(urlParams.has('Hrank') && urlParams.has('Hbet'))) {
+                alert('Hプレイヤーのクエリが有効ではありません');
+            } else {
+                document.getElementById('rankBB').value = urlParams.get('Hrank');
+                document.getElementById('betBB').value = urlParams.get('Hbet');
+                document.getElementById('checkboxBB').checked = true;
+            }
+        }
+    }
     document.getElementById("playerForm").addEventListener("submit", function(event) {
         event.preventDefault();
         
@@ -181,19 +309,19 @@
         for (var i = 0; i < players.length; i++) {
             var row = document.createElement("tr");
             var nameCell = document.createElement("td");
-            var positionCell = document.createElement("td");
+            // var positionCell = document.createElement("td");
             var betCell = document.createElement("td");
             var rankCell = document.createElement("td");
             var chipsCell = document.createElement("td");
                 
             nameCell.textContent = players[i];
-            positionCell.textContent = positions[i];
+            // positionCell.textContent = positions[i];
             betCell.textContent = bets[i];
             rankCell.textContent = ranks[i];
             chipsCell.textContent = chips[i];
                 
             row.appendChild(nameCell);
-            row.appendChild(positionCell);
+            // row.appendChild(positionCell);
             row.appendChild(betCell);
             row.appendChild(rankCell);
             row.appendChild(chipsCell);
@@ -204,6 +332,24 @@
         
         
     });
+    document.getElementById('clipboardButton').addEventListener('click', async () => {
+        try {
+            // クリップボードからテキスト（URL）を取得
+            const text = await navigator.clipboard.readText();
+
+            // URLかどうかを確認
+            if (text.startsWith('http://') || text.startsWith('https://')) {
+                // URLに移動
+                window.location.href = text;
+            } else {
+                alert('クリップボードの内容が有効なURLではありません');
+            }
+        } catch (err) {
+            console.error('クリップボードからURLを取得できませんでした: ', err);
+            alert('クリップボードからURLを取得できませんでした。権限が必要です。');
+        }
+    });
+    window.onload = populateFormFromURL;
 </script>
 
 </body>
