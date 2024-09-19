@@ -144,20 +144,23 @@
         const urlParams = new URLSearchParams(window.location.search);
 
         // Aプレイヤー (UTG)
-        if (urlParams.has('Arank')||urlParams.has('Abet')) {
-            if(!(urlParams.has('Arank')&&urlParams.has('Abet'))){
+        if (urlParams.has('Arank') || urlParams.has('Abet') || urlParams.has('Aname')) {
+            if (!(urlParams.has('Arank') && urlParams.has('Abet') && urlParams.has('Aname'))) {
                 alert('Aプレイヤーのクエリが有効ではありません');
-            }else{
+            } else {
+                document.getElementById('UTG').value = urlParams.get('Aname');
                 document.getElementById('rankUTG').value = urlParams.get('Arank');
                 document.getElementById('betUTG').value = urlParams.get('Abet');
                 document.getElementById('checkboxUTG').checked = true;
             }
         }
+
         // Bプレイヤー (UTG+1)
-        if (urlParams.has('Brank') || urlParams.has('Bbet')) {
-            if (!(urlParams.has('Brank') && urlParams.has('Bbet'))) {
+        if (urlParams.has('Brank') || urlParams.has('Bbet') || urlParams.has('Bname')) {
+            if (!(urlParams.has('Brank') && urlParams.has('Bbet') && urlParams.has('Bname'))) {
                 alert('Bプレイヤーのクエリが有効ではありません');
             } else {
+                document.getElementById('UTG1').value = urlParams.get('Bname');
                 document.getElementById('rankUTG1').value = urlParams.get('Brank');
                 document.getElementById('betUTG1').value = urlParams.get('Bbet');
                 document.getElementById('checkboxUTG1').checked = true;
@@ -165,10 +168,11 @@
         }
 
         // Cプレイヤー (LJ)
-        if (urlParams.has('Crank') || urlParams.has('Cbet')) {
-            if (!(urlParams.has('Crank') && urlParams.has('Cbet'))) {
+        if (urlParams.has('Crank') || urlParams.has('Cbet') || urlParams.has('Cname')) {
+            if (!(urlParams.has('Crank') && urlParams.has('Cbet') && urlParams.has('Cname'))) {
                 alert('Cプレイヤーのクエリが有効ではありません');
             } else {
+                document.getElementById('LJ').value = urlParams.get('Cname');
                 document.getElementById('rankLJ').value = urlParams.get('Crank');
                 document.getElementById('betLJ').value = urlParams.get('Cbet');
                 document.getElementById('checkboxLJ').checked = true;
@@ -176,10 +180,11 @@
         }
 
         // Dプレイヤー (HJ)
-        if (urlParams.has('Drank') || urlParams.has('Dbet')) {
-            if (!(urlParams.has('Drank') && urlParams.has('Dbet'))) {
+        if (urlParams.has('Drank') || urlParams.has('Dbet') || urlParams.has('Dname')) {
+            if (!(urlParams.has('Drank') && urlParams.has('Dbet') && urlParams.has('Dname'))) {
                 alert('Dプレイヤーのクエリが有効ではありません');
             } else {
+                document.getElementById('HJ').value = urlParams.get('Dname');
                 document.getElementById('rankHJ').value = urlParams.get('Drank');
                 document.getElementById('betHJ').value = urlParams.get('Dbet');
                 document.getElementById('checkboxHJ').checked = true;
@@ -187,10 +192,11 @@
         }
 
         // Eプレイヤー (CO)
-        if (urlParams.has('Erank') || urlParams.has('Ebet')) {
-            if (!(urlParams.has('Erank') && urlParams.has('Ebet'))) {
+        if (urlParams.has('Erank') || urlParams.has('Ebet') || urlParams.has('Ename')) {
+            if (!(urlParams.has('Erank') && urlParams.has('Ebet') && urlParams.has('Ename'))) {
                 alert('Eプレイヤーのクエリが有効ではありません');
             } else {
+                document.getElementById('CO').value = urlParams.get('Ename');
                 document.getElementById('rankCO').value = urlParams.get('Erank');
                 document.getElementById('betCO').value = urlParams.get('Ebet');
                 document.getElementById('checkboxCO').checked = true;
@@ -198,10 +204,11 @@
         }
 
         // Fプレイヤー (BTN)
-        if (urlParams.has('Frank') || urlParams.has('Fbet')) {
-            if (!(urlParams.has('Frank') && urlParams.has('Fbet'))) {
+        if (urlParams.has('Frank') || urlParams.has('Fbet') || urlParams.has('Fname')) {
+            if (!(urlParams.has('Frank') && urlParams.has('Fbet') && urlParams.has('Fname'))) {
                 alert('Fプレイヤーのクエリが有効ではありません');
             } else {
+                document.getElementById('BTN').value = urlParams.get('Fname');
                 document.getElementById('rankBTN').value = urlParams.get('Frank');
                 document.getElementById('betBTN').value = urlParams.get('Fbet');
                 document.getElementById('checkboxBTN').checked = true;
@@ -209,10 +216,11 @@
         }
 
         // Gプレイヤー (SB)
-        if (urlParams.has('Grank') || urlParams.has('Gbet')) {
-            if (!(urlParams.has('Grank') && urlParams.has('Gbet'))) {
+        if (urlParams.has('Grank') || urlParams.has('Gbet') || urlParams.has('Gname')) {
+            if (!(urlParams.has('Grank') && urlParams.has('Gbet') && urlParams.has('Gname'))) {
                 alert('Gプレイヤーのクエリが有効ではありません');
             } else {
+                document.getElementById('SB').value = urlParams.get('Gname');
                 document.getElementById('rankSB').value = urlParams.get('Grank');
                 document.getElementById('betSB').value = urlParams.get('Gbet');
                 document.getElementById('checkboxSB').checked = true;
@@ -220,16 +228,21 @@
         }
 
         // Hプレイヤー (BB)
-        if (urlParams.has('Hrank') || urlParams.has('Hbet')) {
-            if (!(urlParams.has('Hrank') && urlParams.has('Hbet'))) {
+        if (urlParams.has('Hrank') || urlParams.has('Hbet') || urlParams.has('Hname')) {
+            if (!(urlParams.has('Hrank') && urlParams.has('Hbet') && urlParams.has('Hname'))) {
                 alert('Hプレイヤーのクエリが有効ではありません');
             } else {
+                document.getElementById('BB').value = urlParams.get('Hname');
                 document.getElementById('rankBB').value = urlParams.get('Hrank');
                 document.getElementById('betBB').value = urlParams.get('Hbet');
                 document.getElementById('checkboxBB').checked = true;
             }
         }
     }
+
+    // ページ読み込み時に関数を実行
+    window.onload = populateFormFromURL;
+
     document.getElementById("playerForm").addEventListener("submit", function(event) {
         event.preventDefault();
         
